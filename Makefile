@@ -400,11 +400,11 @@ endif
 ifneq ($(HELPERS-y),)
 	$(call install-prog,$(HELPERS-y),$(DESTDIR)$(libexecdir))
 endif
-ifneq ($(BLOBS),)
-	set -e; for x in $(BLOBS); do \
-		$(INSTALL_DATA) $(SRC_PATH)/pc-bios/$$x "$(DESTDIR)$(qemu_datadir)"; \
-	done
-endif
+#ifneq ($(BLOBS),)
+#	set -e; for x in $(BLOBS); do \
+#		$(INSTALL_DATA) $(SRC_PATH)/pc-bios/$$x "$(DESTDIR)$(qemu_datadir)"; \
+#	done
+#endif
 ifeq ($(CONFIG_GTK),y)
 	$(MAKE) -C po $@
 endif
