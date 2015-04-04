@@ -25,6 +25,9 @@
 #
 # The <format-string> should be a sprintf()-compatible format string.
 
+#xen-hvm.c
+cpu_handle_ioreq(uint8_t type,uint32_t size,uint64_t addr,uint64_t data)"type %x size %02x port: %"PRIx64" data: %"PRIx64
+
 # util/oslib-win32.c
 # util/oslib-posix.c
 qemu_memalign(size_t alignment, size_t size, void *ptr) "alignment %zu size %zu ptr %p"

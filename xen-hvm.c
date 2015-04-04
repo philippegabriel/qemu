@@ -25,6 +25,7 @@
 #include <xen/hvm/ioreq.h>
 #include <xen/hvm/params.h>
 #include <xen/hvm/e820.h>
+#include "trace.h"
 
 //#define DEBUG_XEN_HVM
 
@@ -851,7 +852,8 @@ static void cpu_handle_ioreq(void *opaque)
     handle_buffered_iopage(state);
     if (req) {
         handle_ioreq(req);
-
+/*PG-trace ioreq*/
+trace_cpu_handle_ioreq(req->type,req->size,req->addr,req->data);
         if (req->state != STATE_IOREQ_INPROCESS) {
             fprintf(stderr, "Badness in I/O request ... not in service?!: "
                     "%x, ptr: %x, port: %"PRIx64", "
