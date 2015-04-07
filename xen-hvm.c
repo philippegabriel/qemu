@@ -774,6 +774,8 @@ static void handle_ioreq(ioreq_t *req)
         req->data &= ((target_ulong) 1 << (8 * req->size)) - 1;
     }
 
+/*PG-trace ioreq*/
+trace_xen_ioreq(req->type,req->size,req->addr,req->data);
     switch (req->type) {
         case IOREQ_TYPE_PIO:
             cpu_ioreq_pio(req);
@@ -852,8 +854,6 @@ static void cpu_handle_ioreq(void *opaque)
     handle_buffered_iopage(state);
     if (req) {
         handle_ioreq(req);
-/*PG-trace ioreq*/
-trace_cpu_handle_ioreq(req->type,req->size,req->addr,req->data);
         if (req->state != STATE_IOREQ_INPROCESS) {
             fprintf(stderr, "Badness in I/O request ... not in service?!: "
                     "%x, ptr: %x, port: %"PRIx64", "
