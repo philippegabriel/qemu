@@ -775,7 +775,7 @@ static void handle_ioreq(ioreq_t *req)
     }
 
 /*PG-trace ioreq*/
-trace_xen_ioreq(req->type,req->size,req->addr,req->data);
+trace_xen_ioreq(req->type,req->dir,req->data_is_ptr,req->size,req->addr,req->data);
     switch (req->type) {
         case IOREQ_TYPE_PIO:
             cpu_ioreq_pio(req);
